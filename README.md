@@ -5,13 +5,13 @@
 ## Installation
 
 ```sh
-npm i reactive
+npm i @dmytromykhailiuk/reactive
 ```
 
 ## Example of usage
 
 ```typescript
-import { Signal, ComputedSignal, SignalEffect, DebouncedSignalEffect } from 'reactive';
+import { Signal, ComputedSignal, SignalEffect, DebouncedSignalEffect } from '@dmytromykhailiuk/reactive';
 
 const a = new Signal(1);
 const b = new Signal(2);

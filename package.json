@@ -1,5 +1,5 @@
 {
-  "name": "reactive",
+  "name": "@dmytromykhailiuk/reactive",
   "version": "1.0.0",
   "description": "Simple and Powerful Signal implementation",
   "files": [
