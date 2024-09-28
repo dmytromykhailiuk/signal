@@ -1,5 +1,7 @@
 let CURRENT_EXECUTION: ComputedSignal | SignalEffect | DebouncedSignalEffect = null;
 
+type UpdateCallback<T> = (_: T) => T;
+
 export class Signal<T = any> {
   private isDestoyed = false;
   private observers = new Set<ComputedSignal | SignalEffect | DebouncedSignalEffect>();
@@ -58,6 +60,17 @@ export class Signal<T = any> {
       throw new Error('Signal already destroyed!');
     }
     this.observers = observers;
+  }
+
+  update(input: UpdateCallback<T> | T): void {
+    if (this.isDestoyed) {
+      throw new Error('Signal already destroyed!');
+    }
+    if (typeof input === 'function' && typeof this._value !== 'function') {
+      this.value = (input as UpdateCallback<T>)(this._value);
+    } else {
+      this.value = input as T;
+    }
   }
 
   subscribe(callback: (_: T) => void): () => void {

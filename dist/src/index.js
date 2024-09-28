@@ -53,6 +53,17 @@ class Signal {
         }
         this.observers = observers;
     }
+    update(input) {
+        if (this.isDestoyed) {
+            throw new Error('Signal already destroyed!');
+        }
+        if (typeof input === 'function' && typeof this._value !== 'function') {
+            this.value = input(this._value);
+        }
+        else {
+            this.value = input;
+        }
+    }
     subscribe(callback) {
         if (this.isDestoyed) {
             throw new Error('Signal already destroyed!');

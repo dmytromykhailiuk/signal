@@ -1,3 +1,4 @@
+type UpdateCallback<T> = (_: T) => T;
 export declare class Signal<T = any> {
     private _value;
     private isDestoyed;
@@ -14,6 +15,7 @@ export declare class Signal<T = any> {
     }>);
     get __observers__(): Set<ComputedSignal | SignalEffect | DebouncedSignalEffect>;
     set __observers__(observers: Set<ComputedSignal | SignalEffect | DebouncedSignalEffect>);
+    update(input: UpdateCallback<T> | T): void;
     subscribe(callback: (_: T) => void): () => void;
     trigger(): void;
     registerObserver(observer: ComputedSignal | SignalEffect | DebouncedSignalEffect): void;
@@ -91,3 +93,4 @@ export declare class DebouncedSignalEffect {
     private runDebounce;
     private runCallback;
 }
+export {};

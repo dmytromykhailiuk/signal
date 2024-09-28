@@ -10,6 +10,7 @@ npm i @dmytromykhailiuk/reactive
 
 ## Example of usage
 
+### Basic examples
 ```typescript
 import { Signal, ComputedSignal, SignalEffect, DebouncedSignalEffect } from '@dmytromykhailiuk/reactive';
 
@@ -47,5 +48,43 @@ b.value = b.value + 2;
 
 
 // DebouncedSignalEffect 14
+
+```
+
+### Ways to change the value of Signal
+```typescript
+const example = new Signal(1);
+
+// Using setter of "value" field
+example.value = 3; 
+console.log(example.value); // 3
+
+
+// Using "update" method
+example.update(5); 
+console.log(example.value); // 5
+
+
+// Using "update" method with callback
+example.update(prevValue => prevValue + 5);
+console.log(example.value); // 10
+
+```
+
+### Alternative way to watch for Signal or Computed using "subscribe"
+```typescript
+const example = new Signal(0);
+
+// using "subscribe" method
+const unsub = example.subscribe((value) => console.log('subscribe', value));
+
+example.update(2);
+// subscribe 2
+example.update(2);
+example.update(4);
+// subscribe 4
+unsub();
+
+// 
 
 ```
